@@ -4,9 +4,9 @@ import Home02 from "./home-component-02";
 import Home03 from "./home-component-03";
 
 function Home() {
-  const [btn1Toggle, setBtn1Toggle] = useState(true);
-  const [btn2Toggle, setBtn2Toggle] = useState(true);
-  const [btn3Toggle, setBtn3Toggle] = useState(true);
+  const [btn1Toggle, setBtn1Toggle] = useState(false);
+  const [btn2Toggle, setBtn2Toggle] = useState(false);
+  const [btn3Toggle, setBtn3Toggle] = useState(false);
 
   return (
     <div>
