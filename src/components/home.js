@@ -1,11 +1,9 @@
-import React from "react";
-import {useState} from "react";
+import React, { useState } from "react";
 import Home01 from "./home-component-01";
 import Home02 from "./home-component-02";
 import Home03 from "./home-component-03";
 
 function Home() {
-
   const [btn1Toggle, setBtn1Toggle] = useState(true);
   const [btn2Toggle, setBtn2Toggle] = useState(true);
   const [btn3Toggle, setBtn3Toggle] = useState(true);
@@ -15,7 +13,6 @@ function Home() {
       <h1>Home</h1>
 
       <div className="home-display">
-
         <button onClick={() => setBtn1Toggle(!btn1Toggle)}>General List</button>
         {btn1Toggle && <Home01 />}
 
@@ -24,9 +21,9 @@ function Home() {
 
         <button onClick={() => setBtn3Toggle(!btn3Toggle)}>Shopping List</button>
         {btn3Toggle && <Home03 />}
-
       </div>
     </div>
   );
 }
+
 export default Home;
