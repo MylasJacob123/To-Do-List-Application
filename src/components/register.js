@@ -1,90 +1,122 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 
-function Register(props) {
-  // const [username, setUsername] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
+function Register() {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [errors, setErrors] = useState({});
 
-  // const validateEmail = (email) => {
-  //   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  //   return re.test(email);
-  // };
-
-  // const add = () => {
-  //   const newErrors = {};
-
-  //   if (!username) newErrors.username = "Username is required";
-  //   if (!email) newErrors.email = "Email is required";
-  //   if (!password) newErrors.password = "Password is required";
-  //   if (!confirmPassword)
-  //     newErrors.confirmPassword = "Confirmation is required";
-
-  //   if (username < 5 || username > 15)
-  //     newErrors.username =
-  //       "Username can't be under 5 characters or over twenty";
-  //   if (email && !validateEmail(email))
-  //     newErrors.email = "Invalid email format";
-  //   if (password < 6) newErrors.password = "Can't have less then 6 characters";
-  //   if (password !== confirmPassword) newErrors.confirmPassword = "Passwords don't match";
-
-  //   if (Object.keys(newErrors).length > 0) {
-  //     setErrors(newErrors);
-  //     return;
-  //   }
-
-  //   props.add(username, email, password, confirmPassword);
-  //   setUsername("");
-  //   setEmail("");
-  //   setPassword("");
-  //   setConfirmPassword("");
-    
-  // };
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
   };
+
+  const validate = () => {
+    const newErrors = {};
+
+    if (!username) {
+      newErrors.username = "Username is required";
+    } else if (!/^[A-Z][a-zA-Z0-9]*[^a-zA-Z0-9]{2,}$/.test(username)) {
+      newErrors.username =
+        "Username must start with a capital letter, be between 6 to 15 characters, and include at least 2 symbols";
+    }
+
+    if (!email) {
+      newErrors.email = "Email is required";
+    } else if (!validateEmail(email)) {
+      newErrors.email = "Invalid email format";
+    }
+
+    if (!password) {
+      newErrors.password = "Password is required";
+    } else if (!/(?=.*\d)(?=.*[!@#$%^&*])/.test(password)) {
+      newErrors.password =
+        "Password must be at least 7 characters long and include at least 1 number and 1 symbol";
+    }
+
+    if (!confirmPassword) {
+      newErrors.confirmPassword = "Please confirm password";
+    } else if (password !== confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate()) {
+      console.log("Form submitted");
+    }
+  };
+
   return (
     <div>
       <h1>Register</h1>
 
-      <form>
-        <label htmlFor="username">Username</label>
-        <br />
-        <input
-          type="text"
-          name="username"
-          id="username"
-          placeholder="Username"
-        />
-        <br />
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="username">Username</label>
+          <br />
+          <input
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          {errors.username && <p>{errors.username}</p>}
+        </div>
 
-        <label htmlFor="email">Email</label>
-        <br />
-        <input type="text" name="email" id="email" placeholder="Email" />
-        <br />
+        <div>
+          <label htmlFor="email">Email</label>
+          <br />
+          <input
+            type="text"
+            name="email"
+            id="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          {errors.email && <p>{errors.email}</p>}
+        </div>
 
-        <label htmlFor="password">Password</label>
-        <br />
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Password"
-        />
-        <br />
+        <div>
+          <label htmlFor="password">Password</label>
+          <br />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {errors.password && <p>{errors.password}</p>}
+        </div>
 
-        <label htmlFor="confirmation">Confirm Password</label>
-        <br />
-        <input
-          type="password"
-          name="confirmation"
-          id="confirmation"
-          placeholder="Confirmation"
-        />
-        <br />
+        <div>
+          <label htmlFor="confirmation">Confirm Password</label>
+          <br />
+          <input
+            type="password"
+            name="confirmation"
+            id="confirmation"
+            placeholder="Confirmation"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+        </div>
 
-        {/* <button onClick={add}>Register</button> */}
+        <button type="submit">Register</button>
       </form>
     </div>
   );
+}
 
 export default Register;
