@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../components/register.css";
 
 function Register() {
   const [username, setUsername] = useState("");
@@ -53,63 +54,69 @@ function Register() {
   };
 
   return (
-    <div>
+    <div className="registration-page">
       <h1>Register</h1>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
-        <br />
-        <input
-          type="text"
-          name="username"
-          id="username"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-        {errors.username && <p>{errors.username}</p>}
-        <br />
+      <form className="registration-form" onSubmit={handleSubmit}>
+        <div>
+          <label className="reg-label" htmlFor="username">Username</label>
+          <br />
+          <input className="reg-input"
+            type="text"
+            name="username"
+            id="username"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          {errors.username && <p className="error">{errors.username}</p>}
+        </div>
 
-        <label htmlFor="email">Email</label>
-        <br />
-        <input
-          type="text"
-          name="email"
-          id="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        {errors.email && <p>{errors.email}</p>}
-        <br />
+        <div>
+          <label className="reg-label" htmlFor="email">Email</label>
+          <br />
+          <input className="reg-input"
+            type="text"
+            name="email"
+            id="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          {errors.email && <p className="error">{errors.email}</p>}
+        </div>
 
-        <label htmlFor="password">Password</label>
-        <br />
-        <input
-          type="password"
-          name="password"
-          id="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {errors.password && <p>{errors.password}</p>}
-        <br />
+        <div>
+          <label className="reg-label" htmlFor="password">Password</label>
+          <br />
+          <input className="reg-input"
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          {errors.password && <p className="error">{errors.password}</p>}
+        </div>
 
-        <label htmlFor="confirmation">Confirm Password</label>
-        <br />
-        <input
-          type="password"
-          name="confirmation"
-          id="confirmation"
-          placeholder="Confirmation"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-        />
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <br />
+        <div>
+          <label className="reg-label" htmlFor="confirmation">Confirm Password</label>
+          <br />
+          <input className="reg-input"
+            type="password"
+            name="confirmation"
+            id="confirmation"
+            placeholder="Confirmation"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          {errors.confirmPassword && (
+            <p className="error">{errors.confirmPassword}</p>
+          )}
+        </div>
 
-        <button type="submit">Register</button>
+        <button className="reg-btn" type="submit">Register</button>
       </form>
     </div>
   );

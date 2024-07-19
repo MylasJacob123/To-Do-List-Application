@@ -40,9 +40,9 @@ function Login() {
       <h1 className="heading">Login</h1>
       <form className="form" onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="email">Email</label>
+          <label className="log-label" htmlFor="email">Email</label>
           <br />
-          <input
+          <input className="log-input"
             type="text"
             name="email"
             id="email"
@@ -50,13 +50,13 @@ function Login() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-          {errors.email && <p>{errors.email}</p>}
+          {errors.email && <p className="error">{errors.email}</p>}
         </div>
 
         <div>
-          <label htmlFor="password">Password</label>
+          <label className="log-label" htmlFor="password">Password</label>
           <br />
-          <input
+          <input className="log-input"
             type="password"
             name="password"
             id="password"
@@ -64,11 +64,10 @@ function Login() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          {errors.password && <p>{errors.password}</p>}
+          {errors.password && <p className="error">{errors.password}</p>}
         </div>
-        <br />
 
-        <button type="submit">Login</button>
+        <button className="login-btn" type="submit">Login</button>
       </form>
     </div>
   );
