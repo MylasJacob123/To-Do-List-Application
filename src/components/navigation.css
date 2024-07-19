@@ -1,0 +1,34 @@
+.navbar {
+    background-color: aqua;
+    padding: 0 13px 0 13px;
+    margin: 30px;
+    border-radius: 19px;
+    border: 5px solid rgb(0, 216, 216);
+}
+
+ul {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: aqua;
+    min-width: 430px;
+    min-height: 60px;
+    gap: 70px;
+    border: 5px solid rgb(0, 216, 216);
+    border-radius: 10px;
+    list-style: none;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    font-size: 20px;
+}
+
+a:hover {
+    color: white;
+    background-color: rgb(0, 216, 216);
+    border-radius: 5px;
+    padding: 10px;
+}
