@@ -1,30 +1,46 @@
-import React, { useState } from "react";
-import Home01 from "./home-component-01";
-import Home02 from "./home-component-02";
-import Home03 from "./home-component-03";
-import "../components/home.css"
+import React, { useState } from 'react';
+import TodoItem from './TodoItem';
+import AddTodo from './AddTodo';
+import SearchBar from './SearchBar';
+import "../components/home.css";
 
-function Home() {
-  const [btn1Toggle, setBtn1Toggle] = useState(false);
-  const [btn2Toggle, setBtn2Toggle] = useState(false);
-  const [btn3Toggle, setBtn3Toggle] = useState(false);
+const HomePage = () => {
+  const [todos, setTodos] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const addTodo = (todo) => {
+    setTodos([...todos, todo]);
+  };
+
+  const updateTodo = (updatedTodo) => {
+    setTodos(todos.map(todo => (todo.id === updatedTodo.id ? updatedTodo : todo)));
+  };
+
+  const deleteTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id));
+  };
+
+  const filteredTodos = todos.filter(todo =>
+    todo.description.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <div>
-      <h1>Home</h1>
-
-      <div className="home-display">
-        <button onClick={() => setBtn1Toggle(!btn1Toggle)}>General List</button>
-        {btn1Toggle && <Home01 />}
-
-        <button onClick={() => setBtn2Toggle(!btn2Toggle)}>Mandatory List</button>
-        {btn2Toggle && <Home02 />}
-
-        <button onClick={() => setBtn3Toggle(!btn3Toggle)}>Shopping List</button>
-        {btn3Toggle && <Home03 />}
+    <div className='home-display'>
+      <h2>To-Do List</h2>
+      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <AddTodo addTodo={addTodo} />
+      <div>
+        {filteredTodos.map(todo => (
+          <TodoItem
+            key={todo.id}
+            todo={todo}
+            updateTodo={updateTodo}
+            deleteTodo={deleteTodo}
+          />
+        ))}
       </div>
     </div>
   );
-}
+};
 
-export default Home;
+export default HomePage;

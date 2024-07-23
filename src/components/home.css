@@ -1,1 +1,12 @@
-
+.home-display {
+    display: flex;
+    flex-direction: column;
+    gap: 3vh;
+    box-sizing: content-box;
+    background-color: aquamarine;
+    min-height: 80vh;
+    min-width: 60vh;
+    padding: 60px;
+    border-radius: 35px;
+    margin-bottom: 50px;
+}
