@@ -33,7 +33,7 @@ function Register() {
       newErrors.password = "Password is required";
     } else if (!/(?=.*\d)(?=.*[!@#$%^&*])/.test(password)) {
       newErrors.password =
-        "Password must be at least 7 characters long and include at least 1 number and 1 symbol";
+        "Password must include at least 1 number and 1 symbol";
     }
 
     if (!confirmPassword) {
@@ -46,10 +46,30 @@ function Register() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
-      console.log("Form submitted");
+      try {
+        const response = await fetch('http://localhost:5000/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            username,
+            email,
+            password,
+          }),
+        });
+
+        if (response.ok) {
+          console.log('Form submitted successfully');
+        } else {
+          console.log('Form submission failed');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
     }
   };
 
@@ -59,9 +79,12 @@ function Register() {
 
       <form className="registration-form" onSubmit={handleSubmit}>
         <div>
-          <label className="reg-label" htmlFor="username">Username</label>
+          <label className="reg-label" htmlFor="username">
+            Username
+          </label>
           <br />
-          <input className="reg-input"
+          <input
+            className="reg-input"
             type="text"
             name="username"
             id="username"
@@ -73,9 +96,12 @@ function Register() {
         </div>
 
         <div>
-          <label className="reg-label" htmlFor="email">Email</label>
+          <label className="reg-label" htmlFor="email">
+            Email
+          </label>
           <br />
-          <input className="reg-input"
+          <input
+            className="reg-input"
             type="text"
             name="email"
             id="email"
@@ -87,9 +113,12 @@ function Register() {
         </div>
 
         <div>
-          <label className="reg-label" htmlFor="password">Password</label>
+          <label className="reg-label" htmlFor="password">
+            Password
+          </label>
           <br />
-          <input className="reg-input"
+          <input
+            className="reg-input"
             type="password"
             name="password"
             id="password"
@@ -101,9 +130,12 @@ function Register() {
         </div>
 
         <div>
-          <label className="reg-label" htmlFor="confirmation">Confirm Password</label>
+          <label className="reg-label" htmlFor="confirmation">
+            Confirm Password
+          </label>
           <br />
-          <input className="reg-input"
+          <input
+            className="reg-input"
             type="password"
             name="confirmation"
             id="confirmation"
@@ -116,7 +148,9 @@ function Register() {
           )}
         </div>
 
-        <button className="reg-btn" type="submit">Register</button>
+        <button className="reg-btn" type="submit">
+          Register
+        </button>
       </form>
     </div>
   );
