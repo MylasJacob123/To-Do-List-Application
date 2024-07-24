@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
-    min-height: 680px;
+    min-height: 580px;
     min-width: 390px;
     line-height: 41px;
     text-align: center;
@@ -28,7 +28,7 @@
     justify-content: center;
     background-color: aqua;
     min-width: 300px;
-    min-height: 550px;
+    min-height: 350px;
     border-radius: 18px;
 }
 
