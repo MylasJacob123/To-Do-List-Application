@@ -46,30 +46,12 @@ function Register() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      try {
-        const response = await fetch('http://localhost:5000/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            username,
-            email,
-            password,
-          }),
-        });
-
-        if (response.ok) {
-          console.log('Form submitted successfully');
-        } else {
-          console.log('Form submission failed');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-      }
+      console.log('Form submitted successfully');
+    } else {
+      console.log('Form submission failed due to validation errors');
     }
   };
 
