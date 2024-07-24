@@ -1,17 +1,22 @@
-import React from "react";
+import React from 'react';
+import './SearchBar.css';
 
-const SearchBar = ({ searchTerm, setSearchTerm }) => {
+function SearchBar({ searchTerm, setSearchTerm }) {
+
   return (
-    <div>
-    <input
-      type="text"
-      placeholder="Search tasks..."
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
-    />
-    <button>Search</button>
+    <div className="search-bar-container">
+      <input className="search-input"
+        type="text"
+        placeholder="Search Tasks"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      <button className="search-button">Search</button>
     </div>
   );
-};
+
+}
 
 export default SearchBar;
+
+

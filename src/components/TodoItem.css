@@ -1,0 +1,74 @@
+.todo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+    max-width: 600px; 
+    cursor: pointer;
+}
+
+.todo-item:hover {
+    background-color: #e0f7fa;
+}
+
+.todo-item.high {
+    border-left: 18px solid #ff1100;
+    border-right: 18px solid #ff1100;
+}
+
+.todo-item.medium {
+    border-left: 18px solid #ff7300;
+    border-right: 18px solid #ff7300;
+}
+
+.todo-item.low {
+    border-left: 18px solid #19d41f;
+    border-right: 18px solid #19d41f;
+}
+
+.set-description {
+    max-width: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.todo-tasks {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.todo-details {
+    padding: 10px;
+    border-top: 1px solid #ccc;
+    width: 100%;
+}
+
+.btn-container {
+    display: flex;
+    gap: 8px;
+} 
+
+.edit-btn, .delete-btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-btn:hover {
+    background-color: rgb(0, 238, 238);
+    color: #fff;
+}
+
+.delete-btn:hover {
+    background-color: red;
+    color: black;
+}

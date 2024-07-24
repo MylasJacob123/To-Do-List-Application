@@ -3,12 +3,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
     min-height: 680px;
     min-width: 390px;
     line-height: 41px;
     text-align: center;
     border-radius: 18px;
     background-color: aquamarine;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .error {

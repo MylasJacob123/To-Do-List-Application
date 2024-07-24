@@ -26,7 +26,7 @@ const HomePage = () => {
 
   return (
     <div className='home-display'>
-      <h2>To-Do List</h2>
+      <h2 className="home-heading">To-Do Items</h2>
       <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
       <AddTodo addTodo={addTodo} />
       <div>

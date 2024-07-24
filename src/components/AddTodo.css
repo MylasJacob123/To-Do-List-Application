@@ -1,0 +1,42 @@
+.add-todo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70px;
+    gap: 5px;
+}
+
+.add-todo-input {
+    border-radius: 4px;
+    border: 1px solid #ccc; 
+    min-height: 19px; 
+    min-width: 230px; 
+    resize: vertical; 
+    padding-top: 12px;
+    z-index: 1;
+}
+
+.add-todo-container select {
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    min-height: 19px;
+}
+
+.add-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    background-color: rgb(0, 238, 238);
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.add-todo-container button:hover {
+    background-color: rgb(15, 184, 127);
+    color: black;
+    padding: 10px 20px;
+    font-size: 1.3em;
+}
