@@ -29,7 +29,7 @@ const AddTodo = ({ addTodo }) => {
         onChange={(e) => setPriority(e.target.value)}
       >
         <option value="High">High</option>
-        <option value="Medium">Mid</option>
+        <option value="Medium">Medium</option>
         <option value="Low">Low</option>
       </select>
       <button className="add-btn" onClick={handleAdd}>Add Task</button>

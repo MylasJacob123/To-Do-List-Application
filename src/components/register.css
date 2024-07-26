@@ -26,10 +26,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    box-sizing: border-box;
     background-color: aqua;
     min-width: 300px;
     min-height: 350px;
     border-radius: 18px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .reg-label {
