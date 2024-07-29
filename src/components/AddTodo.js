@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import './AddTodo.css';
+import React, { useState } from "react";
+import "./AddTodo.css";
 
 const AddTodo = ({ addTodo }) => {
-  const [description, setDescription] = useState('');
-  const [priority, setPriority] = useState('Medium');
+  const [description, setDescription] = useState("");
+  const [priority, setPriority] = useState("Medium");
 
   const handleAdd = () => {
     const newTodo = {
@@ -12,7 +12,7 @@ const AddTodo = ({ addTodo }) => {
       priority
     };
     addTodo(newTodo);
-    setDescription('');
+    setDescription("");
     setPriority('Medium');
   };
 
