@@ -16,7 +16,7 @@ function Register() {
     const newErrors = {};
 
     if (!name) {
-      newErrors.name = "Name is required";
+      newErrors.name = "Username is required";
     } else if (!/^[A-Z][a-zA-Z0-9]*[^a-zA-Z0-9]{2,}$/.test(name)) {
       newErrors.name =
         "Name must start with a capital letter, be between 6 to 15 characters, and include at least 2 symbols";
@@ -55,7 +55,7 @@ function Register() {
       <form className="registration-form" onSubmit={handleSubmit}>
         <div>
           <label className="reg-label" htmlFor="name">
-            Name
+            Username
           </label>
           <br />
           <input
@@ -63,7 +63,7 @@ function Register() {
             type="text"
             name="name"
             id="name"
-            placeholder="Name"
+            placeholder="Username"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
