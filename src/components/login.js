@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import "../components/login.css"
+import axios from "axios"; // You'll need to install axios with npm or yarn
+import "../components/login.css";
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [loginError, setLoginError] = useState("");
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -28,10 +32,19 @@ function Login() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validate()) {
-      console.log("Form submitted");
+      try {
+        // Make a POST request to the backend login endpoint
+        const response = await axios.post('http://localhost:3001/users/login', { email, password });
+        console.log("Login successful:", response.data);
+        // Handle successful login
+        navigate('/'); // Redirect to home on success
+      } catch (error) {
+        console.error("Login error:", error.response ? error.response.data : error.message);
+        setLoginError("Invalid email or password.");
+      }
     }
   };
 
@@ -66,6 +79,8 @@ function Login() {
           />
           {errors.password && <p className="error">{errors.password}</p>}
         </div>
+
+        {loginError && <p className="error">{loginError}</p>}
 
         <button className="login-btn" type="submit">Login</button>
       </form>

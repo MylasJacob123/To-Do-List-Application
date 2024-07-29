@@ -46,6 +46,26 @@ app.post('/users', async (req, res) => {
   res.json(user);
 });
 
+app.post('/users/login', async (req, res) => {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Email and password are required' });
+    }
+  
+    try {
+      const user = await User.findOne({ where: { email } });
+      if (user && user.password === password) { // Note: In a real application, passwords should be hashed
+        res.json({ message: 'Login successful', user });
+      } else {
+        res.status(401).json({ message: 'Invalid email or password' });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
+  
+
 app.put('/users/:id', async (req, res) => {
   const user = await User.findByPk(req.params.id);
   if (user) {

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../components/register.css";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 function Register() {
   const [name, setName] = useState("");
@@ -8,6 +9,7 @@ function Register() {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [success, setSuccess] = useState("");
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -54,6 +56,7 @@ function Register() {
         setEmail("");
         setPassword("");
         setErrors({});
+        navigate('/'); // Redirect to home on success
       }).catch((error) => {
         console.error('There was an error!', error);
         setErrors({ submit: 'Failed to submit the form. Please try again.' });
@@ -125,7 +128,7 @@ function Register() {
         {errors.submit && <p className="error">{errors.submit}</p>}
         {success && <p className="success">{success}</p>}
 
-        <button className="reg-btn" type="submit" onClick={submitRegister}>
+        <button className="reg-btn" type="submit">
           Register
         </button>
       </form>
