@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors'); 
 const { Sequelize, Model, DataTypes } = require('sequelize');
 
 const app = express();
@@ -21,6 +22,9 @@ User.init({
 
 // Sync models with database
 sequelize.sync();
+
+// Use the cors middleware
+app.use(cors());
 
 // Middleware for parsing request body
 app.use(bodyParser.urlencoded({ extended: false }));

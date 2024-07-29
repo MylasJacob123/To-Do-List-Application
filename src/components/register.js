@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import "../components/register.css";
+import axios from 'axios';
 
 function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
+  const [success, setSuccess] = useState("");
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -39,13 +41,29 @@ function Register() {
     return Object.keys(newErrors).length === 0;
   };
 
+  const submitRegister = () => {
+    if (validate()) {
+      axios.post('http://localhost:3001/users', {
+        name,
+        email,
+        password
+      }).then((res) => {
+        console.log(res.data);  // Log the response data to check what you receive
+        setSuccess("Registration successful!");
+        setName("");
+        setEmail("");
+        setPassword("");
+        setErrors({});
+      }).catch((error) => {
+        console.error('There was an error!', error);
+        setErrors({ submit: 'Failed to submit the form. Please try again.' });
+      });
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validate()) {
-      console.log('Form submitted successfully');
-    } else {
-      console.log('Form submission failed due to validation errors');
-    }
+    submitRegister();
   };
 
   return (
@@ -104,7 +122,10 @@ function Register() {
           {errors.password && <p className="error">{errors.password}</p>}
         </div>
 
-        <button className="reg-btn" type="submit">
+        {errors.submit && <p className="error">{errors.submit}</p>}
+        {success && <p className="success">{success}</p>}
+
+        <button className="reg-btn" type="submit" onClick={submitRegister}>
           Register
         </button>
       </form>
