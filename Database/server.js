@@ -20,6 +20,13 @@ User.init({
   password: DataTypes.STRING
 }, { sequelize, modelName: 'user' });
 
+// Define Task model
+class Task extends Model {}
+Task.init({
+  description: DataTypes.STRING,
+  priority: DataTypes.STRING
+}, { sequelize, modelName: 'task' });
+
 // Sync models with database
 sequelize.sync();
 
@@ -42,29 +49,26 @@ app.get('/users/:id', async (req, res) => {
 });
 
 app.post('/users', async (req, res) => {
-  const user = await User.create(req.body);
-  res.json(user);
+  try {
+    const user = await User.create(req.body);
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ message: 'Error creating user', error });
+  }
 });
 
 app.post('/users/login', async (req, res) => {
-    const { email, password } = req.body;
-    if (!email || !password) {
-      return res.status(400).json({ message: 'Email and password are required' });
+  try {
+    const user = await User.findOne({ where: { email: req.body.email } });
+    if (user && user.password === req.body.password) {
+      res.json({ message: 'Login successful', userId: user.id });
+    } else {
+      res.status(401).json({ message: 'Invalid email or password' });
     }
-  
-    try {
-      const user = await User.findOne({ where: { email } });
-      if (user && user.password === password) { // Note: In a real application, passwords should be hashed
-        res.json({ message: 'Login successful', user });
-      } else {
-        res.status(401).json({ message: 'Invalid email or password' });
-      }
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: 'Internal server error' });
-    }
-  });
-  
+  } catch (error) {
+    res.status(500).json({ message: 'Error logging in', error });
+  }
+});
 
 app.put('/users/:id', async (req, res) => {
   const user = await User.findByPk(req.params.id);
@@ -83,6 +87,46 @@ app.delete('/users/:id', async (req, res) => {
     res.json({ message: 'User deleted' });
   } else {
     res.status(404).json({ message: 'User not found' });
+  }
+});
+
+// CRUD routes for Task model
+app.get('/tasks', async (req, res) => {
+  const tasks = await Task.findAll();
+  res.json(tasks);
+});
+
+app.get('/tasks/:id', async (req, res) => {
+  const task = await Task.findByPk(req.params.id);
+  res.json(task);
+});
+
+app.post('/tasks', async (req, res) => {
+  try {
+    const task = await Task.create(req.body);
+    res.json(task);
+  } catch (error) {
+    res.status(500).json({ message: 'Error creating task', error });
+  }
+});
+
+app.put('/tasks/:id', async (req, res) => {
+  const task = await Task.findByPk(req.params.id);
+  if (task) {
+    await task.update(req.body);
+    res.json(task);
+  } else {
+    res.status(404).json({ message: 'Task not found' });
+  }
+});
+
+app.delete('/tasks/:id', async (req, res) => {
+  const task = await Task.findByPk(req.params.id);
+  if (task) {
+    await task.destroy();
+    res.json({ message: 'Task deleted' });
+  } else {
+    res.status(404).json({ message: 'Task not found' });
   }
 });
 

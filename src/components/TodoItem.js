@@ -29,9 +29,9 @@ function TodoItem({ todo, updateTodo, deleteTodo }) {
             value={priority}
             onChange={(e) => setPriority(e.target.value)}
           >
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
             <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
           </select>
           <button onClick={handleUpdate}>Save</button>
         </div>

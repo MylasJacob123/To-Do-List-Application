@@ -3,7 +3,7 @@ import "./AddTodo.css";
 
 const AddTodo = ({ addTodo }) => {
   const [description, setDescription] = useState("");
-  const [priority, setPriority] = useState("Medium");
+  const [priority, setPriority] = useState("Low");
 
   const handleAdd = () => {
     const newTodo = {
@@ -13,7 +13,7 @@ const AddTodo = ({ addTodo }) => {
     };
     addTodo(newTodo);
     setDescription("");
-    setPriority('Medium');
+    setPriority("Low");
   };
 
   return (
@@ -28,9 +28,9 @@ const AddTodo = ({ addTodo }) => {
         value={priority}
         onChange={(e) => setPriority(e.target.value)}
       >
-        <option value="High">High</option>
-        <option value="Medium">Medium</option>
         <option value="Low">Low</option>
+        <option value="Medium">Medium</option>
+        <option value="High">High</option>
       </select>
       <button className="add-btn" onClick={handleAdd}>Add Task</button>
     </div>

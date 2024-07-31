@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import axios from "axios"; // You'll need to install axios with npm or yarn
+import axios from "axios";
 import "../components/login.css";
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
   const [loginError, setLoginError] = useState("");
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -36,10 +36,10 @@ function Login() {
     e.preventDefault();
     if (validate()) {
       try {
-        // Make a POST request to the backend login endpoint
         const response = await axios.post('http://localhost:3001/users/login', { email, password });
         console.log("Login successful:", response.data);
-        // Handle successful login
+        // Handle successful login (e.g., store user ID, redirect)
+        localStorage.setItem('userId', response.data.userId); // Store the user ID
         navigate('/'); // Redirect to home on success
       } catch (error) {
         console.error("Login error:", error.response ? error.response.data : error.message);

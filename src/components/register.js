@@ -21,9 +21,9 @@ function Register() {
 
     if (!name) {
       newErrors.name = "Username is required";
-    } else if (!/^[A-Z][a-zA-Z0-9]*[^a-zA-Z0-9]{2,}$/.test(name)) {
+    } else if (!/^[A-Za-z][A-Za-z0-9]{4,13}[!@#$%^&*]{2,}$/.test(name)) {
       newErrors.name =
-        "Name must start with a capital letter, be between 6 to 15 characters, and include at least 2 symbols";
+        "Start with a letter, 6 to 15 characters, at least 2 symbols";
     }
 
     if (!email) {

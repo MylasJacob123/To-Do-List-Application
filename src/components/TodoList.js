@@ -1,20 +1,35 @@
 import React, { useState } from 'react';
 import "./TodoList.css";
 import AddTodo from './AddTodo';
+import TodoItem from './TodoItem';
 
 const TodoList = () => {
-  const [todo, setTodo] = useState([]);
+  const [todos, setTodos] = useState([]);
 
   const addTodo = (newTodo) => {
-    setTodo([...todo, newTodo]);
+    setTodos([...todos, newTodo]);
+  };
+
+  const updateTodo = (updatedTodo) => {
+    setTodos(todos.map(todo => todo.id === updatedTodo.id ? updatedTodo : todo));
+  };
+
+  const deleteTodo = (id) => {
+    setTodos(todos.filter(todo => todo.id !== id));
   };
 
   return (
     <div>
       <AddTodo addTodo={addTodo} />
       <ul>
-        {todo.map((todo) => (
-          <li key={todo.id}>{todo.description} - {todo.priority}</li>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            <TodoItem 
+              todo={todo} 
+              updateTodo={updateTodo} 
+              deleteTodo={deleteTodo} 
+            />
+          </li>
         ))}
       </ul>
     </div>
