@@ -1,19 +1,33 @@
 import React, { useState } from 'react';
 import './TodoItem.css';
+import axios from "axios";
 
-function TodoItem({ todo, updateTodo, deleteTodo }) {
+const TodoItem = ({ todo, updateTodo, deleteTodo }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const [description, setDescription] = useState(todo.description);
   const [priority, setPriority] = useState(todo.priority);
 
-  const handleUpdate = () => {
-    updateTodo({
-      ...todo,
-      description,
-      priority
-    });
-    setIsEditing(false);
+  const handleUpdate = async () => {
+    try {
+      const response = await axios.put(`http://localhost:3001/tasks/${todo.id}`, {
+        description,
+        priority
+      });
+      updateTodo(response.data);
+      setIsEditing(false);
+    } catch (error) {
+      console.error("Error updating task", error);
+    }
+  };
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:3001/tasks/${todo.id}`);
+      deleteTodo(todo.id);
+    } catch (error) {
+      console.error("Error deleting task", error);
+    }
   };
 
   return (
@@ -46,7 +60,7 @@ function TodoItem({ todo, updateTodo, deleteTodo }) {
               <p>{description}</p>
               <div className="btn-container">
                 <button className="edit-btn" onClick={(e) => { e.stopPropagation(); setIsEditing(true); }}>Edit</button>
-                <button className="delete-btn" onClick={(e) => { e.stopPropagation(); deleteTodo(todo.id); }}>Delete</button>
+                <button className="delete-btn" onClick={(e) => { e.stopPropagation(); handleDelete(); }}>Delete</button>
               </div>
             </div>
           )}
